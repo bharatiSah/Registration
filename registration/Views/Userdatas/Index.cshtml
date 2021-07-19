@@ -1,0 +1,106 @@
+﻿@using PagedList.Mvc
+@model  PagedList.IPagedList<registration.Entities.Userdata>
+
+@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm())
+{
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.firstName)
+                </th>*@
+            <th>
+                @Html.ActionLink("First Name", "Index", new { Sorting_Order = ViewBag.SortingName })
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.lastName)
+                </th>*@
+            <th>
+                @Html.ActionLink("Last Name", "Index", new { Sorting_Order = ViewBag.LastName })
+            </th>
+            <th>
+                @Html.ActionLink("Email", "Index", new { Sorting_Order = ViewBag.Email })
+            </th>
+            <th>
+                @Html.Label("Contact Number")
+                @*@Html.DisplayNameFor(model => model.contactNumber)*@
+            </th>
+            <th>
+                @Html.Label("Gender")
+                @*@Html.DisplayNameFor(model => model.gender)*@
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.dateOfBirth)*@
+                @Html.Label("Date Of Birth")
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.city)*@
+                @Html.Label("City")
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Image)*@
+                @Html.Label("Image")
+            </th>
+            <th></th>
+        </tr>
+
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+                <td>
+                    @Model[i].firstName
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.lastName)*@
+                    @Model[i].lastName
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.email)*@
+                    @Model[i].email
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.contactNumber)*@
+                    @Model[i].contactNumber
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.gender)*@
+                    @Model[i].gender
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.dateOfBirth)*@
+                    @Model[i].dateOfBirth
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.city)*@
+                    @Model[i].city
+
+                </td>
+                <td>
+                    <img class="imgDetails" src="@Url.Action("GetImage", new { id = Model[i].Id })" />
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model[i].Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = Model[i].Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = Model[i].Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div id="container" style="margin-left: 20px">
+        <p></p>
+        <p></p>
+        <div class="pagination" style="margin-left: 400px">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>
+    </div>
+
+}
