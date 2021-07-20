@@ -1,6 +1,21 @@
-﻿.imgDetails {
+﻿body {
+    background-image: url('themes/base/images/insurance-quote-form-background-fontana-ca.jpg');
+}
+.imgDetails {
     height: 88px;
     width: 135px;
+}
+.searchblock {
+    text-align: center;
+    margin-top: 16px;
+    color: #337ab7;
+}
+.form-horizontal .control-label  {
+    color: #337ab7;
+}
+.navbar-nav .dl-horizontal
+.control-label col-md-2 {
+    color: #337ab7;
 }
 .ul.pagination {
     display: inline-block;
@@ -11,7 +26,12 @@
 ul.pagination li {
     display: inline;
 }
-
+.div {
+    color: #337ab7;
+}
+.table {
+    color: #337ab7;
+}
     ul.pagination li a {
         color: black;
         float: left;

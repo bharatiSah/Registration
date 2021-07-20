@@ -6,7 +6,14 @@
 }
 @using (Html.BeginForm())
 {
-    <h2>Index</h2>
+    <p class="searchblock">
+        Search Name: @Html.TextBox("Findusers")
+        <input type="submit" value="Find" />
+    </p>
+}
+@using (Html.BeginForm())
+{
+    
 
     <p>
         @Html.ActionLink("Create New", "Create")

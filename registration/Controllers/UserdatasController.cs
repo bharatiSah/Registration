@@ -20,15 +20,24 @@ namespace registration.Controllers
         Common common = new Common();
 
         // GET: Userdatas
-        public async Task<ActionResult> Index(string Sorting_Order, int? page)
+        public async Task<ActionResult> Index(string Sorting_Order, int? page , string Findusers)
         {
-            int pageSize = 2;
+            int pageSize = 5;
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "FName" : "";
             ViewBag.LastName = Sorting_Order == "LastName" ? "LNameD" : "LastName";
             ViewBag.Email = Sorting_Order == "Email" ? "EmailD" : "Email";
+            ViewBag.findValue = Findusers;
             var users = await db.Userdatas.ToListAsync();
+            if (!String.IsNullOrEmpty(Findusers))
+            {
+                users = users.Where(x => x.firstName.ToUpper().Contains(Findusers.ToUpper())
+                    || x.lastName.ToUpper().Contains(Findusers.ToUpper())
+                    || x.email.ToUpper().Contains(Findusers.ToUpper())
+                    || x.city.ToUpper().Contains(Findusers.ToUpper())
+                    ).ToList();
+            }
             IPagedList <Userdata> userData = null;
             switch (Sorting_Order)
             {
